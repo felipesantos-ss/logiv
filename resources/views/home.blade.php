@@ -18,7 +18,7 @@
                             <h2 class="text-xl font-semibold text-gray-900">
                                 Histórico de encomendas
                             </h2>
-                            <form action="#" method="GET">
+                            <form action="{{ route('frete.historico') }}" method="GET">
                                 <div class="relative w-full max-w-md">
                                     <input type="tel" name="telefone" placeholder="Número de telefone" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600" oninput="aplicarMascaraTelefone(this)" maxlength="15">
                                     <button type="submit" class="absolute inset-y-0 right-0 px-4 py-2 text-white bg-green-600 rounded-r-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600">Consultar</button>
