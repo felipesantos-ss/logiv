@@ -20,7 +20,7 @@
                             </h2>
                             <form action="{{ route('frete.historico') }}" method="GET">
                                 <div class="relative w-full max-w-md">
-                                    <input type="tel" name="telefone" placeholder="Número de telefone" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600" oninput="aplicarMascaraTelefone(this)" maxlength="15">
+                                    <input type="tel" name="telefone" oninput="formatPhoneNumber(this)" placeholder="Número de telefone" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600" oninput="aplicarMascaraTelefone(this)" maxlength="15">
                                     <button type="submit" class="absolute inset-y-0 right-0 px-4 py-2 text-white bg-green-600 rounded-r-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-600">Consultar</button>
                                 </div>
                             </form>
@@ -32,4 +32,23 @@
                     <img src="/cover-logiv.png" alt="Logiv-Background" class="object-cover max-h-screen max-w-screen">
                 </div>
             </div>
+
+            <script>
+                formatPhoneNumber = function (input) {
+                    let valor = input.value;
+                    valor = valor.replace(/\D/g, "");
+
+                    if (valor.length > 0) {
+                        valor = "(" + valor;
+                    }
+                    if (valor.length > 3) {
+                        valor = valor.slice(0, 3) + ") " + valor.slice(3);
+                    }
+                    if (valor.length > 10) {
+                        valor = valor.slice(0, 10) + "-" + valor.slice(10);
+                    }
+
+                    input.value = valor.slice(0, 15);
+                }
+            </script>
 </x-layout>
