@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\FreteStatus;
-use App\Http\Requests\StoreEtapaRequest;
 use App\Models\Etapa;
 use App\Models\Frete;
+use App\Enums\FreteStatus;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\StoreEtapaRequest;
 
 class EtapaController extends Controller
 {
-    public function store(StoreEtapaRequest $request)
+    public function store(StoreEtapaRequest $request): JsonResponse|Etapa
     {
         $frete = Frete::find($request->frete_id);
 
