@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Fretes;
 
 use App\Filament\Resources\Fretes\Pages\CreateFrete;
-use App\Filament\Resources\Fretes\Pages\EditFrete;
 use App\Filament\Resources\Fretes\Pages\ListFretes;
 use App\Filament\Resources\Fretes\Pages\ViewFrete;
 use App\Filament\Resources\Fretes\RelationManagers\EtapasRelationManager;
@@ -53,7 +52,6 @@ class FreteResource extends Resource
             'index' => ListFretes::route('/'),
             'create' => CreateFrete::route('/create'),
             'view' => ViewFrete::route('/{record}'),
-            'edit' => EditFrete::route('/{record}/edit'),
         ];
     }
 }

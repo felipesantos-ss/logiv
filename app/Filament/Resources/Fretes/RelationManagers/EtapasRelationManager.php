@@ -6,12 +6,7 @@ use App\Enums\FreteStatus;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DissociateAction;
-use Filament\Actions\DissociateBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
@@ -91,16 +86,17 @@ class EtapasRelationManager extends RelationManager
             ])
 
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DissociateAction::make(),
-                DeleteAction::make(),
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DissociateBulkAction::make(),
                     DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public function isReadOnly(): bool
+    {
+        return false;
     }
 }
