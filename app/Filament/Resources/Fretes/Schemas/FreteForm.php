@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Fretes\Schemas;
 
-use App\Enums\FreteStatus;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -13,14 +12,18 @@ class FreteForm
     {
         return $schema
             ->components([
+                TextInput::make('codigo_rastreio')
+                    ->label('Código de Rastreio')
+                    ->readOnly()
+                    ->default('Código Gerado Automaticamente')
+                    ->required(),
+                TextInput::make('status')
+                    ->readOnly()
+                    ->default('Em Trânsito')
+                    ->required(),
                 TextInput::make('origem')
                     ->required(),
                 TextInput::make('destino')
-                    ->required(),
-                TextInput::make('codigo_rastreio')
-                    ->required(),
-                Select::make('status')
-                    ->options(FreteStatus::class)
                     ->required(),
                 Select::make('remetente_id')
                     ->label('Remetente')
