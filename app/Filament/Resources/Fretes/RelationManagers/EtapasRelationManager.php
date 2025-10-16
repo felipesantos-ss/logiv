@@ -19,6 +19,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class EtapasRelationManager extends RelationManager
 {
@@ -31,7 +32,8 @@ class EtapasRelationManager extends RelationManager
                 TextInput::make('descricao')
                     ->required()
                     ->maxLength(255),
-                Select::make('status')
+                Select::make('tipo_etapa')
+                    ->label('Tipo da Etapa')
                     ->options(FreteStatus::toNameValueArray())
                     ->required(),
             ]);
@@ -71,9 +73,23 @@ class EtapasRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                CreateAction::make(),
+                CreateAction::make()
+                    ->visible(function () {
+                        $frete = $this->getOwnerRecord();
+
+                        return $frete->status !== FreteStatus::ENTREGUE;
+                    })
+                    ->after(function (Model $etapa, array $data) {
+                        $tipoEtapa = $data['tipo_etapa'];
+                        $novoFreteStatus = FreteStatus::fromName($tipoEtapa);
+
+                        $this->getOwnerRecord()->update(['status' => $novoFreteStatus]);
+
+                        return redirect(request()->header('Referer'));
+                    }),
                 AssociateAction::make(),
             ])
+
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),

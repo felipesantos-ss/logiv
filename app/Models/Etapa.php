@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Etapa extends Model
 {
@@ -10,4 +11,9 @@ class Etapa extends Model
         'frete_id',
         'descricao',
     ];
+
+    public function frete(): BelongsTo
+    {
+        return $this->belongsTo(Frete::class);
+    }
 }
